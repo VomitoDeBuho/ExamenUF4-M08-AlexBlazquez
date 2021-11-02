@@ -1,3 +1,11 @@
+/**
+ * Classe del menú i submenus del joc
+ *
+ * @author     Alex Blazquez Ruiz
+ * @version    v0.2
+ * 
+ */
+package com.company;
 import java.util.Scanner;
 
 public class Menu {
@@ -6,12 +14,21 @@ public class Menu {
     ConfigGame configGame;
     Game game;
 
+    /**
+     * Constructor principal i unic de la classe menú, amb dos parametres d'entrada
+     * @param game
+     * @param config
+     */
     public Menu(Game game, ConfigGame config) {
         opcio = -1;
         this.game = game;
         configGame = config;
     }
 
+    /**
+     * Funció de la classe menú on és printa tot i demana a l'usuari les diferents opcions
+     * @param
+     */
     public void menuPrincipal() {
         do {
             System.out.println("1. Configuració : " + configGame);
@@ -41,7 +58,10 @@ public class Menu {
             }
         }while(opcio != 0);
     }
-
+    /**
+     * Funció del menú per establir la configuració si l'usuari ho desitga
+     * @param
+     */
     public void setConfig() {
         System.out.println("Entra el teu nom: ");
         String n = in.nextLine();
@@ -53,7 +73,10 @@ public class Menu {
         configGame.setNumTracks(in.nextInt());
         in.nextLine();
     }
-
+    /**
+     * Funció del menú per establir amb quin vehicle fer la competició
+     * @param
+     */
     public void play() {
         System.out.println("Amb quin vehicle vols fer el campionat?");
         System.out.println("1) Bicicletes");
