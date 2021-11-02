@@ -1,3 +1,11 @@
+/**
+ * Classe on transcurreix tot el joc i estableix les normes i mecàniques, necessita llibreries externes com poden ser l'arraylist i l'scanner entre altres.
+ *
+ * @author     Alex Blazquez Ruiz
+ * @version    v0.2
+ * 
+ */
+package com.company;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,23 +25,39 @@ public class Game {
     ResultatsCursa resul = new ResultatsCursa();
     //definició de les puntuacions als primers 3 classificats
     private int[] puntuacions = {10,8,5};
-
+    /**
+     * Objecte Cursa on trovem el temps transcorrit per cada vehicle
+     */
     class ResultatsCursa {
         double temps;
         Vehicle vehicle;
     }
-
+	/**
+     * Constructor principal i únic de la classe Game, realitza la configuració per defecte i obre el menú per l'interacció de l'usuari
+     * @param
+     */
     public Game() {
         config = new ConfigGame();
         menu = new Menu(this,config);
     }
-
+    /**
+     * Funció que inicia dintre de l'objecte menú la funció menuPrincipal
+     * @param
+     */
     public void start() {
         menu.menuPrincipal();
     }
 
+    
+    /** 
+     * Printa la configuració de la partida, amb els valors per defecte, permet modificar aquest, crea els participants, i el nº de pilots
+     * per calcular quin serà el temps de cadascún, utilitza un random per simular quant ha trigat un vehicle, fa un recorregut per tots els circuits
+     * ordena la classificació, dona els punts i al final printa el guanyador.
+     * Utilitza els atributs d'aquesta classe ANSI... per establir colors, com el groc per saber el circuit i el blau per saber quin jugador seràs
+     * @param tipus
+     * @todo refactoritzar i modular el mètode play
+     */
     public void play(int tipus)  {
-        //pendent per fer: refactoritzar i modular el mètode play
         System.out.println(config);
 
         //crear participant usuari i resta de participants
@@ -77,7 +101,12 @@ public class Game {
 
     }
 
-    //pendent per fer: refactoritzar el codi repetit
+    
+    /** 
+     * Afageix participants a la cursa, el 1r portarà una bicicleta, el segon portarà un cotxe amb les velocitats proporcionades, en cas de posar 3 o 4, la opció no serà implementada
+     * @param tipus
+     * @todo refactoritzar el codi repetit
+     */
     private void addParticipants(int tipus) {
 
         switch (tipus) {
@@ -97,9 +126,12 @@ public class Game {
                 break;
         }
     }
-
+    /** 
+     * Funció per ordenar i printar els resultats de manera colorida
+     * @param tipus
+     * @todo refactoritzar el codi repetit
+     */
     public void finalResults() {
-        //ordenar per punts
         resultatsCursa.sort((o1, o2) -> (int) (o2.vehicle.getPilot().getPunts() - o1.vehicle.getPilot().getPunts()));
         for(int i = 0; i < resultatsCursa.size(); i++) {
             ResultatsCursa r = resultatsCursa.get(i);
@@ -110,10 +142,20 @@ public class Game {
         System.out.println();
     }
 
+    /** 
+     * Funció per netejar els resultats de la cursa
+     * @param tipus
+     * @todo refactoritzar el codi repetit
+     */
     public void initResults() {
         resultatsCursa.clear();
     }
 
+    /** 
+     * Funció per establir els participants amb els seus resultats
+     * @param tipus
+     * @todo refactoritzar el codi repetit
+     */
     private void setParticipants() {
         participants[0].setPilot(new Pilot(config.getUserName()));
         resul.vehicle = participants[0];
